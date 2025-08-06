@@ -1,0 +1,3 @@
+[submodule "optscale"]
+	url = https://github.com/hystax/optscale.git
+	path = optscale
