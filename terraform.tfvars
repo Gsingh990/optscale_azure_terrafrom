@@ -6,15 +6,15 @@ tags                = {
   managed_by = "optscale-infra"
 }
 
-vnet_name           = "optscale-vnet-optscale-infra"
+vnet_name           = "optscale-vnet-app"
 vnet_address_space  = ["10.10.0.0/16"]
 
 aks_subnet_name           = "optscale-aks-subnet"
 aks_subnet_address_prefixes = ["10.10.1.0/24"]
 
-aks_cluster_name    = "optscale-aks-cluster-optscale-infra"
+aks_cluster_name    = "optscale-aks-cluster-app"
 kubernetes_version  = "1.33.2"
-dns_prefix          = "optscale-aks-optscale-infra"
+dns_prefix          = "optscale-aks-app"
 
 system_node_pool_vm_size    = "Standard_B2s"
 system_node_pool_node_count = 1
@@ -38,10 +38,10 @@ db_admin_login      = "optscaleadmin"
 db_admin_password   = "Dboptscale@672495"
 db_vm_size          = "Standard_B2s"
 
-redis_cache_name    = "optscale-redis-cache-optscale-infra"
+redis_cache_name    = "optscale-redis-cache-app"
 redis_cache_sku     = "Standard"
 
-storage_account_name = "optscalesainfra"
+storage_account_name = "optscaleappsa"
 
 optscale_version = "latest"
 
