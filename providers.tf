@@ -19,8 +19,8 @@ provider "azurerm" {
   features {}
 }
 
-# Configure the Kubernetes provider using outputs from the deployed AKS cluster
+# Configure the Kubernetes provider to use kubeconfig
 provider "kubernetes" {
-  load_config_file       = true
-  config_path            = "~/.kube/config"
+  # Use kubeconfig written by: az aks get-credentials ...
+  config_path = pathexpand("~/.kube/config")
 }
