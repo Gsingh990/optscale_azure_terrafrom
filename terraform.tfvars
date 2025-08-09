@@ -1,4 +1,4 @@
-resource_group_name = "optscale-rg-optscale-infra"
+resource_group_name = "optscale_app_rg"
 location            = "eastus"
 tags                = {
   project = "optscale"

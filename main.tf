@@ -38,6 +38,7 @@ module "aks_cluster" {
   tags                = var.tags
 }
 
+/*
 module "bastion_host" {
   source = "./modules/bastion_host"
 
@@ -48,7 +49,9 @@ module "bastion_host" {
   admin_public_key      = var.bastion_admin_public_key
   tags                = var.tags
 }
+*/
 
+/*
 module "azure_bastion" {
   source = "./modules/azure_bastion"
 
@@ -57,6 +60,7 @@ module "azure_bastion" {
   vnet_name           = var.vnet_name
   tags                = var.tags
 }
+*/
 
 module "key_vault" {
   source = "./modules/key_vault"
