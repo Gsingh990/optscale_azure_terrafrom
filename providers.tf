@@ -21,8 +21,6 @@ provider "azurerm" {
 
 # Configure the Kubernetes provider using outputs from the deployed AKS cluster
 provider "kubernetes" {
-  host                   = module.aks_cluster.kube_config.0.host
-  client_certificate     = base64decode(module.aks_cluster.kube_config.0.client_certificate)
-  client_key             = base64decode(module.aks_cluster.kube_config.0.client_key)
-  cluster_ca_certificate = base64decode(module.aks_cluster.kube_config.0.cluster_ca_certificate)
+  load_config_file       = true
+  config_path            = "~/.kube/config"
 }

@@ -69,6 +69,13 @@ module "key_vault" {
   db_admin_password   = var.db_admin_password
 }
 
+# Read the actual database password value from Key Vault for app wiring
+data "azurerm_key_vault_secret" "db_password" {
+  name         = module.key_vault.db_password_secret_name
+  key_vault_id = module.key_vault.key_vault_id
+  depends_on   = [module.key_vault]
+}
+
 module "optscale_db_vm" {
   source = "./modules/optscale_db_vm"
 
@@ -107,7 +114,7 @@ module "optscale_kubernetes_app" {
   db_host             = module.optscale_db_vm.db_server_fqdn
   db_name             = module.optscale_db_vm.db_name
   db_user             = module.optscale_db_vm.db_admin_login
-  db_password         = module.key_vault.db_password_secret_name
+  db_password         = data.azurerm_key_vault_secret.db_password.value
   redis_host          = module.optscale_cache.redis_host_name
   redis_password      = module.optscale_cache.redis_primary_access_key
   storage_account_name = module.optscale_storage.storage_account_name

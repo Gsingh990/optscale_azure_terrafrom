@@ -13,3 +13,9 @@ output "kube_config" {
   value       = azurerm_kubernetes_cluster.main.kube_config
   sensitive   = true
 }
+
+output "kube_admin_config" {
+  description = "The admin KubeConfig block with cluster-admin access."
+  value       = azurerm_kubernetes_cluster.main.kube_admin_config
+  sensitive   = true
+}
