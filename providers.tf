@@ -16,7 +16,12 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {
+    key_vault {
+      # Avoid forced recovery path for non-existent soft-deleted vault names
+      recover_soft_deleted_key_vaults = false
+    }
+  }
 }
 
 # Configure the Kubernetes provider to use kubeconfig

@@ -1,3 +1,7 @@
+/*
+Bootstrap for remote state disabled to avoid conflicts with existing RG/SA.
+If you need it, re-enable and ensure unique names or import existing resources.
+
 resource "azurerm_resource_group" "tfstate_rg" {
   name     = "tfstate-rg"
   location = "eastus"
@@ -22,3 +26,4 @@ resource "random_string" "sa_suffix" {
   special = false
   upper   = false
 }
+*/
