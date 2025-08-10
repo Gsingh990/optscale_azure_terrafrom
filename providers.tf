@@ -24,8 +24,8 @@ provider "azurerm" {
   }
 }
 
-# Configure the Kubernetes provider to use kubeconfig
 provider "kubernetes" {
-  # Use kubeconfig written by: az aks get-credentials ...
-  config_path = pathexpand("~/.kube/config")
+  host                   = "https://optscale-aks-app-h9m1bdj6.b14368d4-3bae-4c83-8ff6-9c53bfcfd791.privatelink.eastus.azmk8s.io"
+  token                  = "<your-token>"
+  cluster_ca_certificate = "<your-cluster-ca-certificate>"
 }

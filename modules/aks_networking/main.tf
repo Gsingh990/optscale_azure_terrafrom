@@ -40,3 +40,41 @@ resource "azurerm_subnet_network_security_group_association" "aks_subnet_nsg_ass
   subnet_id                 = azurerm_subnet.aks_subnet.id
   network_security_group_id = azurerm_network_security_group.aks_nsg.id
 }
+
+resource "azurerm_network_security_group" "bastion_nsg" {
+  name                = "${var.bastion_subnet_name}-nsg"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  tags                = var.tags
+
+  security_rule {
+    name                       = "AllowHttpsOutbound"
+    priority                   = 100
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "bastion_subnet_nsg_association" {
+  subnet_id                 = azurerm_subnet.bastion_subnet.id
+  network_security_group_id = azurerm_network_security_group.bastion_nsg.id
+}
+
+resource "azurerm_network_security_rule" "allow_bastion_to_aks" {
+  name                        = "AllowBastionToAks"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "443"
+  source_address_prefix       = var.bastion_subnet_address_prefixes[0]
+  destination_address_prefix  = "*"
+  resource_group_name         = var.resource_group_name
+  network_security_group_name = azurerm_network_security_group.aks_nsg.name
+}
