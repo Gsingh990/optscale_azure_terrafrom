@@ -2,7 +2,7 @@ resource "azurerm_virtual_network" "main" {
   name                = var.vnet_name
   location            = var.location
   resource_group_name = var.resource_group_name
-  address_space       = ["10.11.0.0/16"]
+  address_space       = var.vnet_address_space
   tags                = var.tags
 }
 
@@ -55,7 +55,7 @@ resource "azurerm_network_security_group" "bastion_nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "443"
-    source_address_prefix      = "*"
+    source_address_prefix      = "VirtualNetwork"
     destination_address_prefix = "10.10.1.4"
   }
 }
