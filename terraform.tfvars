@@ -45,7 +45,7 @@ storage_account_name = "optscaleappsa"
 
 optscale_version = "latest"
 
-key_vault_name    = "opt-kv-a1b2c3d4"
+
 tenant_id         = "ff355289-721e-4dd7-a663-afec62ab9d54"
 agent_object_id   = "94452bde-a4a8-4968-9998-1b7050706199"
 
