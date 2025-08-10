@@ -74,7 +74,7 @@ resource "azurerm_network_security_rule" "allow_bastion_to_aks" {
   source_port_range           = "*"
   destination_port_range      = "443"
   source_address_prefix       = var.bastion_subnet_address_prefixes[0]
-  destination_address_prefix  = "*"
+  destination_address_prefix  = "10.10.1.4"
   resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.aks_nsg.name
 }
