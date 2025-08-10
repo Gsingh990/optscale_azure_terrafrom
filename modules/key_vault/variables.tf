@@ -1,5 +1,5 @@
 variable "key_vault_name" {
-  description = "The name of the Key Vault."
+  description = "The base name of the Key Vault."
   type        = string
 }
 

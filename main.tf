@@ -65,12 +65,12 @@ module "azure_bastion" {
 module "key_vault" {
   source = "./modules/key_vault"
 
-  key_vault_name      = var.key_vault_name
   location            = azurerm_resource_group.optscale_rg.location
   resource_group_name = azurerm_resource_group.optscale_rg.name
   tenant_id           = var.tenant_id
   agent_object_id     = var.agent_object_id
   db_admin_password   = var.db_admin_password
+  key_vault_name      = var.key_vault_name
 }
 
 # Read the actual database password value from Key Vault for app wiring

@@ -1,5 +1,11 @@
+resource "random_string" "kv_suffix" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
 resource "azurerm_key_vault" "optscale_kv" {
-  name                        = var.key_vault_name
+  name                        = "${var.key_vault_name}-${random_string.kv_suffix.result}"
   location                    = var.location
   resource_group_name         = var.resource_group_name
   enabled_for_disk_encryption = true
