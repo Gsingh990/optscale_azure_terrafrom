@@ -115,7 +115,21 @@ Because the AKS API is private, perform Terraform operations from inside the VNe
 
 - The repository includes a bootstrap to create a storage account and container for Terraform state, but the backend is not pre-configured. To use remote state, add a `terraform { backend "azurerm" { ... } }` block and run `terraform init -migrate-state`.
 
-## Changes Made in This Repository
+## Troubleshooting
 
-- Switched the Kubernetes provider to use kubeconfig (`~/.kube/config`) for AAD RBAC alignment instead of client certificates.
-- Fixed secret wiring: the application module now receives the actual DB password value from Key Vault.
+### Error: `VaultAlreadyExists`
+
+This error occurs when the Key Vault name specified in the Terraform configuration already exists in Azure. Since Key Vault names must be globally unique, this can happen if a Key Vault with the same name was recently deleted but not purged.
+
+**Resolution:**
+
+The `key_vault` module was modified to append a random string to the Key Vault name, ensuring that the name is unique on every deployment. The `key_vault_name` variable was also removed from the root `variables.tf` file to prevent it from being overridden.
+
+### Error: `kubelogin failed`
+
+This error occurs when `kubelogin` is unable to authenticate to the AKS cluster. In this case, it was because the bastion host was unable to resolve the private DNS name of the AKS private endpoint.
+
+**Resolution:**
+
+1.  **Linked the private DNS zone to the bastion's VNet:** The private DNS zone for the AKS cluster was linked to the virtual network of the bastion host. This allows the bastion host to resolve the private DNS name of the AKS cluster.
+2.  **Refreshed Kubernetes credentials:** The `az aks get-credentials` command was run to refresh the Kubernetes credentials and update the `kubeconfig` file.

@@ -137,7 +137,11 @@ variable "db_subnet_address_prefixes" {
 }
 
 # Key Vault Variables
-
+variable "key_vault_name" {
+  description = "The name of the Key Vault."
+  type        = string
+  default     = null
+}
 
 variable "tenant_id" {
   description = "The tenant ID for the Key Vault."
