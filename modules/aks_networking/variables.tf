@@ -16,6 +16,7 @@ variable "vnet_name" {
 variable "vnet_address_space" {
   description = "The address space for the Virtual Network."
   type        = list(string)
+  default     = ["10.11.0.0/16"]
 }
 
 variable "aks_subnet_name" {
