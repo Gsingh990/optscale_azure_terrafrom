@@ -70,6 +70,7 @@ module "key_vault" {
   tenant_id           = var.tenant_id
   agent_object_id     = var.agent_object_id
   db_admin_password   = var.db_admin_password
+  key_vault_name      = var.key_vault_name
 }
 
 # Read the actual database password value from Key Vault for app wiring
