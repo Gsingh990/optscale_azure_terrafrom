@@ -124,4 +124,7 @@ module "optscale_kubernetes_app" {
   storage_account_name = module.optscale_storage.storage_account_name
   storage_account_key = module.optscale_storage.storage_account_primary_access_key
   tags                = var.tags
+
+  # Ensure Kubernetes resources are created only after AKS is ready
+  depends_on = [module.aks_cluster]
 }
