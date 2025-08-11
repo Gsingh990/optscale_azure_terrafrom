@@ -6,6 +6,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   kubernetes_version  = var.kubernetes_version
 
   private_cluster_enabled = var.private_cluster_enabled
+  # Ensure AKS uses a system-managed Private DNS zone and links it to the VNet
+  # so that nodes and clients inside the VNet can resolve the private API server FQDN.
+  private_dns_zone_id   = "System"
 
   default_node_pool {
     name       = "systempool"
