@@ -29,7 +29,6 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   azure_active_directory_role_based_access_control {
-    managed            = true
     azure_rbac_enabled = true
     tenant_id          = data.azurerm_client_config.current.tenant_id
     admin_group_object_ids = var.admin_group_object_ids
@@ -49,9 +48,13 @@ resource "azurerm_kubernetes_cluster_node_pool" "user_node_pools" {
   node_count            = each.value.node_count
   vnet_subnet_id        = var.aks_subnet_id
 
-  enable_auto_scaling = each.value.enable_auto_scaling
-  min_count           = each.value.min_count
-  max_count           = each.value.max_count
+  dynamic "autoscaling" {
+    for_each = each.value.enable_auto_scaling ? [1] : []
+    content {
+      min_count = each.value.min_count
+      max_count = each.value.max_count
+    }
+  }
 
   tags = var.tags
 }
