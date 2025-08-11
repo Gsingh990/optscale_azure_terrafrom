@@ -22,6 +22,7 @@ variable "vnet_name" {
 variable "vnet_address_space" {
   description = "The address space for the AKS Virtual Network."
   type        = list(string)
+  default     = ["10.11.0.0/16"]
 }
 
 variable "aks_subnet_name" {
@@ -133,7 +134,7 @@ variable "db_subnet_name" {
 variable "db_subnet_address_prefixes" {
   description = "The address prefixes for the database subnet."
   type        = list(string)
-  default     = ["10.10.2.0/24"]
+  default     = ["10.11.2.0/24"]
 }
 
 # Key Vault Variables
@@ -163,7 +164,7 @@ variable "bastion_subnet_name" {
 variable "bastion_subnet_address_prefixes" {
   description = "The address prefixes for the bastion host subnet."
   type        = list(string)
-  default     = ["10.10.3.0/24"]
+  default     = ["10.11.3.0/24"]
 }
 
 variable "bastion_admin_username" {

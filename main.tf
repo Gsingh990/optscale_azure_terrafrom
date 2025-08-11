@@ -10,7 +10,7 @@ module "aks_networking" {
   resource_group_name = azurerm_resource_group.optscale_rg.name
   location            = azurerm_resource_group.optscale_rg.location
   vnet_name           = var.vnet_name
-  vnet_address_space  = var.vnet_address_space
+  vnet_address_space  = ["10.11.0.0/16"]
   aks_subnet_name     = var.aks_subnet_name
   aks_subnet_address_prefixes = var.aks_subnet_address_prefixes
   db_subnet_name      = var.db_subnet_name
